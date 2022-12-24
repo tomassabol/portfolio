@@ -1,10 +1,11 @@
 import React from 'react';
-import './App.module.css';
+import style from './App.module.css';
+import Links from './Links';
 
-function App() {
+const  App: React.FC = () => {
   return (
-    <div className="App">
-      react
+    <div className={style.pageContainer}>
+      <Links />
     </div>
   );
 }

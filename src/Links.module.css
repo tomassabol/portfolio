@@ -1,0 +1,40 @@
+:root {
+    --primary-color: #9fa8d8;
+    --secondary-color: #EFECD9;
+  }
+
+* {
+    font-weight: bold;
+    background-color: var(--secondary-color);
+    text-align: center;
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--secondary-color);
+}
+
+.header {
+    margin: 1rem;
+    color: #444444;
+}
+
+.header h1 {
+    font-weight: 900;
+}
+
+.btn {
+    cursor: pointer;
+    margin: .7rem;
+    padding: .3rem;
+    width: 15rem;
+    font-size: 1.35rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 3px;
+}
