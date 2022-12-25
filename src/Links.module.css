@@ -1,3 +1,5 @@
+@import url("https://use.typekit.net/cwm2snr.css");
+
 :root {
     --primary-color: #9fa8d8;
     --secondary-color: #EFECD9;
@@ -28,13 +30,23 @@
     font-weight: 900;
 }
 
+.header span {
+    font-family: ligurino, sans-serif;
+    font-weight: 400;
+}
+
 .btn {
+    font-family: ligurino, sans-serif;
     cursor: pointer;
     margin: .7rem;
-    padding: .3rem;
-    width: 15rem;
-    font-size: 1.35rem;
+    width: 17rem;
+    height: 2.4rem;
+    font-size: 1.2rem;
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    border-radius: 3px;
+    box-shadow:.5px .5px 1px 1px var(--secondary-color) inset;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -9,7 +9,7 @@ const navigate = window.open;
     <div className={style.pageContainer}>
       <div className={style.header}>
         <h1>tomáš sabol</h1>
-        <h3>web, ios & .net developer</h3>
+        <h3>web, ios <span>&</span> .net developer</h3>
       </div>
       <div className={style.btn} onClick={() => navigate("https://github.com/tomassabol")}>GitHub</div>
       <div className={style.btn} onClick={() => navigate("https://www.linkedin.com/in/tomas-sabol/")}>LinkedIn</div>
