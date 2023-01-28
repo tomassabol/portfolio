@@ -1,5 +1,6 @@
 * {
     overflow-x: hidden;
+    color: #444444;
 }
 
 .page {
@@ -43,4 +44,15 @@ span {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.footer {
+    background-color: #FFCDD5;
+}
+.footerText {
+    color: #FFF;
+}
+
+#header {
+    font-weight: 950;
 }
