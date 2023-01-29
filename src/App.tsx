@@ -1,12 +1,16 @@
 import React from 'react';
-import style from './App.module.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ByeAzzurra from './ByeAzzurra';
 import Links from './Links';
 
 const  App: React.FC = () => {
   return (
-    <div className={style.pageContainer}>
-      <Links />
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Links />} />
+      <Route path="byeazzurra" element={<ByeAzzurra />} />
+    </Routes>
+    </BrowserRouter>
   );
 }
 
