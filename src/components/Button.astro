@@ -1,11 +1,13 @@
 ---
-export interface Props {
-	body: string;
-	href: string;
-}
+export type Props = { href: string };
 
-const { body, href } = Astro.props;
+const { href } = Astro.props;
 ---
 
-<a href={href} class="w-[18rem] font-medium border-2 border-violet-300 rounded-md bg-violet-300 text-gray-800 py-2 hover:bg-fuchsia-100 hover:border-violet-400 hover:border-2">{body}</a>
-
+<a
+    href={href}
+    target="_blank"
+    class="w-[18rem] font-medium border border-purple-400 rounded-md bg-violet-50/30 dark:bg-purple-400/50 text-purple-800 dark:text-purple-100 py-2 lg:hover:bg-purple-50"
+>
+    <slot />
+</a>
