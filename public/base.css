@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "SF Pro Rounded";
+  src: url("/fonts/SF-Pro-Rounded-Bold.otf") format("opentype"); /* Corrected Path */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.sf-rounded {
+  font-family:
+    "SF Pro Rounded",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}

@@ -1,0 +1,24 @@
+---
+
+---
+
+<div>
+  <script>
+    const body = document.querySelector<HTMLBodyElement>("body");
+    if (body) {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches
+        ? "dark"
+        : "light";
+      body.setAttribute("class", systemTheme);
+
+      window.matchMedia("(prefers-color-scheme: dark)").onchange = (e) => {
+        const systemTheme = e.matches ? "dark" : "light";
+        console.log("System theme changed to", systemTheme);
+        body.setAttribute("class", systemTheme);
+      };
+    }
+  </script>
+
+  <slot />
+</div>
