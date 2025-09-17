@@ -9,6 +9,13 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: rgb(248 250 252); /* slate-50 */
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: rgb(23 23 23); /* neutral-900 */
+  }
 }
 
 .sf-rounded {
