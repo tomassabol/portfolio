@@ -2,11 +2,13 @@
 export type Props = { href: string };
 
 const { href } = Astro.props;
+const isExternal = href.startsWith("http");
 ---
 
 <a
   href={href}
-  target="_blank"
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noopener noreferrer" : undefined}
   class="w-[18rem] font-medium border border-neutral-800 dark:border-neutral-600 rounded-md bg-neutral-50/30 dark:bg-neutral-600/70 text-neutral-800 dark:text-neutral-200 py-2 lg:hover:bg-neutral-200/80 lg:hover:dark:bg-neutral-600"
 >
   <slot />

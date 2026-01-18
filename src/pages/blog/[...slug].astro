@@ -1,0 +1,185 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+const { Content } = await post.render();
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+---
+
+<Layout title={`${post.data.title} | Blog`}>
+  <main class="antialiased font-sans min-h-screen bg-slate-50 dark:bg-neutral-900">
+    <article class="px-6 pt-12 pb-20">
+      <div class="max-w-2xl mx-auto">
+        <!-- Navigation -->
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors mb-10 group"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="group-hover:-translate-x-1 transition-transform"
+          >
+            <path d="m12 19-7-7 7-7"></path>
+            <path d="M19 12H5"></path>
+          </svg>
+          All posts
+        </a>
+
+        <!-- Header -->
+        <header class="mb-10">
+          <div class="flex gap-2 flex-wrap mb-4">
+            {
+              post.data.tags.map((tag) => (
+                <span class="text-xs px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 font-medium">
+                  {tag}
+                </span>
+              ))
+            }
+          </div>
+          <h1
+            class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100 sf-rounded leading-tight"
+          >
+            {post.data.title}
+          </h1>
+          <p class="mt-4 text-lg text-neutral-600 dark:text-neutral-400">
+            {post.data.description}
+          </p>
+          <div class="mt-6 flex items-center gap-4 text-sm text-neutral-500 dark:text-neutral-500">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate)}
+            </time>
+            {
+              post.data.updatedDate && (
+                <span class="italic">
+                  (Updated: {formatDate(post.data.updatedDate)})
+                </span>
+              )
+            }
+          </div>
+          <div class="mt-8 h-px bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent"></div>
+        </header>
+
+        <!-- Content -->
+        <div class="prose-content">
+          <Content />
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors font-medium"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m12 19-7-7 7-7"></path>
+              <path d="M19 12H5"></path>
+            </svg>
+            Back to all posts
+          </a>
+        </footer>
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style is:global>
+  .prose-content {
+    @apply text-neutral-800 dark:text-neutral-200;
+  }
+
+  .prose-content h1 {
+    @apply text-3xl font-bold mt-10 mb-4 text-neutral-900 dark:text-neutral-100;
+  }
+
+  .prose-content h2 {
+    @apply text-2xl font-bold mt-10 mb-4 text-neutral-900 dark:text-neutral-100;
+  }
+
+  .prose-content h3 {
+    @apply text-xl font-bold mt-8 mb-3 text-neutral-900 dark:text-neutral-100;
+  }
+
+  .prose-content p {
+    @apply mb-5 leading-relaxed;
+  }
+
+  .prose-content ul {
+    @apply mb-5 ml-6 list-disc;
+  }
+
+  .prose-content ol {
+    @apply mb-5 ml-6 list-decimal;
+  }
+
+  .prose-content li {
+    @apply mb-2 leading-relaxed;
+  }
+
+  .prose-content strong {
+    @apply font-semibold text-neutral-900 dark:text-neutral-100;
+  }
+
+  .prose-content a {
+    @apply text-amber-600 dark:text-amber-400 underline underline-offset-2 hover:text-amber-700 dark:hover:text-amber-300 transition-colors;
+  }
+
+  .prose-content blockquote {
+    @apply border-l-4 border-amber-500 pl-4 my-6 italic text-neutral-600 dark:text-neutral-400;
+  }
+
+  .prose-content code {
+    @apply bg-neutral-200 dark:bg-neutral-800 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .prose-content pre {
+    @apply bg-neutral-900 dark:bg-neutral-950 p-4 rounded-lg overflow-x-auto my-6;
+  }
+
+  .prose-content pre code {
+    @apply bg-transparent p-0 text-neutral-100;
+  }
+
+  .prose-content hr {
+    @apply my-8 border-neutral-300 dark:border-neutral-700;
+  }
+
+  .prose-content img {
+    @apply rounded-lg my-6;
+  }
+</style>
