@@ -1,12 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 ---
 
-<Layout title="Book a Call">
+<Layout title="Yiyuan Special">
   <!-- Cal inline embed code begins -->
   <div
-    style="width:100vw;height:100vh;overflow:scroll;background-color:black"
-    id="my-cal-inline-30min"
+    style="width:100%;height:100%;overflow:scroll"
+    id="my-cal-inline-yiyuan-special"
   >
   </div>
   <script type="text/javascript">
@@ -42,20 +42,15 @@ import Layout from "../layouts/Layout.astro";
           p(cal, ar);
         };
     })(window, "https://app.cal.com/embed/embed.js", "init");
-    Cal("init", "30min", { origin: "https://app.cal.com" });
+    Cal("init", "yiyuan-special", { origin: "https://app.cal.com" });
 
-    Cal.ns["30min"]("inline", {
-      elementOrSelector: "#my-cal-inline-30min",
-      config: { layout: "month_view", theme: "dark" },
-      calLink: "tomassabol/30min",
+    Cal.ns["yiyuan-special"]("inline", {
+      elementOrSelector: "#my-cal-inline-yiyuan-special",
+      config: { layout: "month_view", useSlotsViewOnSmallScreen: "true" },
+      calLink: "thomas-sabol/yiyuan-special",
     });
 
-    Cal.ns["30min"]("ui", {
-      theme: "dark",
-      cssVarsPerTheme: {
-        light: { "cal-brand": "#292929" },
-        dark: { "cal-brand": "#fafafa" },
-      },
+    Cal.ns["yiyuan-special"]("ui", {
       hideEventTypeDetails: false,
       layout: "month_view",
     });
