@@ -1,15 +1,27 @@
 ---
-export type Props = { href: string };
+export type Props = {
+  href: string;
+  variant?: "primary" | "link";
+};
 
-const { href } = Astro.props;
+const { href, variant = "link" } = Astro.props;
 const isExternal = href.startsWith("http");
+
+const baseClasses =
+  "inline-flex items-center transition-colors duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white";
+
+const variantClasses = {
+  primary:
+    "justify-center px-5 py-2.5 text-base font-medium rounded-lg bg-black text-white hover:bg-black/90 active:bg-black/80 dark:bg-white dark:text-black dark:hover:bg-white/90 dark:active:bg-white/80",
+  link: "text-base text-black/64 hover:text-black active:text-black/80 dark:text-white/56 dark:hover:text-white dark:active:text-white/80",
+};
 ---
 
 <a
   href={href}
   target={isExternal ? "_blank" : undefined}
   rel={isExternal ? "noopener noreferrer" : undefined}
-  class="w-[18rem] font-medium border border-neutral-800 dark:border-neutral-600 rounded-md bg-neutral-50/30 dark:bg-neutral-600/70 text-neutral-800 dark:text-neutral-200 py-2 lg:hover:bg-neutral-200/80 lg:hover:dark:bg-neutral-600"
+  class:list={[baseClasses, variantClasses[variant]]}
 >
   <slot />
 </a>

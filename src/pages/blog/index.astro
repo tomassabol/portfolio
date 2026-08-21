@@ -17,26 +17,25 @@ const formatDate = (date: Date) => {
 
 <Layout title="Blog | Tomáš Sabol">
   <main
-    class="antialiased font-sans min-h-screen bg-slate-50 dark:bg-neutral-900"
+    class="antialiased font-sans min-h-screen bg-white dark:bg-[#0A0A0A]"
   >
-    <!-- Header -->
-    <header class="pt-12 pb-8 px-6">
-      <div class="max-w-2xl mx-auto">
+    <header class="px-6 pt-16 pb-12 md:px-16 md:pt-24">
+      <div class="mx-auto max-w-2xl">
         <a
           href="/"
-          class="inline-flex items-center gap-2 text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors mb-8 group"
+          class="mb-10 inline-flex items-center gap-2 text-sm text-black/64 transition-colors duration-200 ease-out hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black dark:text-white/56 dark:hover:text-white dark:focus-visible:outline-white"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="group-hover:-translate-x-1 transition-transform"
+            aria-hidden="true"
           >
             <path d="m12 19-7-7 7-7"></path>
             <path d="M19 12H5"></path>
@@ -44,67 +43,59 @@ const formatDate = (date: Date) => {
           Back home
         </a>
         <h1
-          class="text-4xl font-bold text-neutral-900 dark:text-neutral-100 sf-rounded"
+          class="text-4xl font-medium tracking-tight text-black dark:text-white sf-rounded"
         >
           Blog
         </h1>
-        <p class="mt-3 text-neutral-600 dark:text-neutral-400 text-lg">
+        <p class="mt-4 max-w-prose text-lg leading-relaxed text-black/64 dark:text-white/56">
           Thoughts on development, technology, and things I'm building.
         </p>
       </div>
     </header>
 
-    <!-- Posts -->
-    <section class="px-6 pb-20">
-      <div class="max-w-2xl mx-auto">
+    <section class="px-6 pb-24 md:px-16">
+      <div class="mx-auto max-w-2xl">
         {
           posts.length === 0 ? (
-            <p class="text-neutral-500 dark:text-neutral-400 text-center py-12">
-              No posts yet. Check back soon!
+            <p class="py-12 text-black/56 dark:text-white/46">
+              No posts yet. Check back soon.
             </p>
           ) : (
-            <ul class="flex flex-col gap-1">
-              {posts
-                .sort(
-                  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-                )
-                .map((post, index) => (
-                  <li
-                    class="group"
-                    style={`animation: fadeSlideIn 0.4s ease-out ${index * 0.1}s both`}
+            <ul class="flex flex-col">
+              {posts.map((post, index) => (
+                <li
+                  class:list={[
+                    index > 0 && "border-t border-black/10 dark:border-white/10",
+                  ]}
+                >
+                  <a
+                    href={`/blog/${post.slug}`}
+                    class="group block py-8 transition-colors duration-200 ease-out hover:bg-black/[0.04] active:bg-black/[0.08] dark:hover:bg-white/[0.09] dark:active:bg-white/[0.14] -mx-4 px-4 md:-mx-6 md:px-6"
                   >
-                    <a
-                      href={`/blog/${post.slug}`}
-                      class="block py-6 -mx-4 px-4 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800/50 transition-all duration-200"
-                    >
-                      <div class="flex flex-col gap-2">
-                        <div class="flex items-start justify-between gap-4">
-                          <h2 class="text-xl font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-                            {post.data.title}
-                          </h2>
-                          <time
-                            datetime={post.data.pubDate.toISOString()}
-                            class="text-sm text-neutral-500 dark:text-neutral-500 whitespace-nowrap mt-1"
-                          >
-                            {formatDate(post.data.pubDate)}
-                          </time>
-                        </div>
-                        <p class="text-neutral-600 dark:text-neutral-400 line-clamp-2">
-                          {post.data.description}
-                        </p>
-                        {post.data.tags.length > 0 && (
-                          <div class="flex gap-2 flex-wrap mt-1">
-                            {post.data.tags.map((tag) => (
-                              <span class="text-xs px-2 py-1 rounded-full bg-neutral-200/70 dark:bg-neutral-700/70 text-neutral-600 dark:text-neutral-300">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
+                    <article class="flex flex-col gap-3">
+                      <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                        <h2 class="text-xl font-medium text-black group-hover:text-black dark:text-white dark:group-hover:text-white">
+                          {post.data.title}
+                        </h2>
+                        <time
+                          datetime={post.data.pubDate.toISOString()}
+                          class="shrink-0 text-sm text-black/56 dark:text-white/50"
+                        >
+                          {formatDate(post.data.pubDate)}
+                        </time>
                       </div>
-                    </a>
-                  </li>
-                ))}
+                      <p class="leading-relaxed text-black/64 dark:text-white/56 line-clamp-2">
+                        {post.data.description}
+                      </p>
+                      {post.data.tags.length > 0 && (
+                        <p class="text-sm text-black/56 dark:text-white/46">
+                          {post.data.tags.join(" · ")}
+                        </p>
+                      )}
+                    </article>
+                  </a>
+                </li>
+              ))}
             </ul>
           )
         }
@@ -112,16 +103,3 @@ const formatDate = (date: Date) => {
     </section>
   </main>
 </Layout>
-
-<style>
-  @keyframes fadeSlideIn {
-    from {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
